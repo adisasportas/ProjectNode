@@ -40,7 +40,6 @@ This will start the server at http://localhost:3000
  You can also configure other variables in this file such as JWT_SECRET for JWT token generation.
 
 ##
-##
 
  ## •API Endpoints
 
