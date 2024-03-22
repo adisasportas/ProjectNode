@@ -1,43 +1,70 @@
 
 # Personal Task Manager API
 
-### Welcome to the Personal Task Manager API project! In this project, you will apply the concepts learned in your MongoDB and Node.js course to build a robust backend for a task management application. The API will allow users to perform CRUD operations on tasks, with authentication using JWT (JSON Web Tokens) for security.
+### Welcome to the Personal Task Manager API project! In this project, you will apply the concepts learned in your MongoDB and Node.js course to build a robust backend for a task management application. Users can perform CRUD (Create, Read, Update, Delete) operations on tasks. #### The API is built using Express.js as the server framework, Mongoose for MongoDB interaction, and JWT #### (JSON Web Tokens) for authentication.
 
-## Objectives
-### Implement JWT Authentication:
- Secure the API with JWT by implementing signup and login functionalities. Ensure users are authenticated before interacting with task management features.
+## • Project Setup
 
-### Develop Express.js Server:
- Utilize Express.js to set up the server, creating a robust API to handle HTTP requests related to task management.
+### To set up the project, follow these steps:
+1.Clone the repository to your local machine:
+#### git clone <repository-url>
+2.Navigate to the project directory:
+#### cd <project-directory>
+3.Install dependencies using npm:
+#### npm install
 
-### Integrate MongoDB Using Mongoose: 
-Design and implement MongoDB database schemas for users and tasks. Use Mongoose to interact with the MongoDB database from the Express.js application.
+## • Dependencies
+#### This project relies on the following dependencies:
 
-### Implement CRUD Operations:
- Create at least three main routes (e.g., /users, /tasks, /categories) supporting full CRUD operations. Organize each route in separate files for codebase organization. Utilize different HTTP methods (POST, GET, PATCH, DELETE).
+• Express.js: A minimal and flexible Node.js web application framework.
+• Mongoose: A MongoDB object modeling tool designed to work in an asynchronous environment.
+• bcrypt: A library for hashing passwords.
+• jsonwebtoken: A library to generate and verify JWTs (JSON Web Tokens).
 
-### Querying and Routing:
- Implement functionality to support querying of tasks and users, such as filtering tasks by status or due date using query parameters.
 
-## Requirements
-Authentication: All routes, except for signup and login, must require JWT authentication. Ensure proper token issuance and validation.
+## • Running the API
 
-### Database Schema:
- Define clear and logical schemas for users and tasks. Include relevant fields such as username, password, email for users, and title, description, status, dueDate for tasks.
+ To run the API, execute the following command in your terminal:
 
-### API Endpoints: 
-Implement at least three main routes with full CRUD capabilities. For example, /users for user registration, information update, and deletion. /tasks for managing tasks. /categories for organizing tasks into categories.
+#### npm start
 
-### Error Handling: 
-Implement proper error handling across the API to manage and return meaningful error responses to clients.
+This command starts the server, and the API will be accessible at the specified endpoints.
+This will start the server at http://localhost:3000
 
-### Documentation:
- Provide basic documentation outlining API endpoints, including required parameters and example request/response formats.
+## • Configuration
 
-### Presentation: 
-Be prepared to present the structure and code of the project, explaining the flow, showcasing the code, and demonstrating API interaction using tools like Postman.
+ Before running the API, you need to configure the MongoDB connection. Open the config/config.env  #### file and set the MONGO_URI variable to your MongoDB connection URI.
 
-## Purpose
-This project aims to solidify your understanding of building full-stack applications with MongoDB and Node.js, focusing on backend development with Express.js and Mongoose. It provides hands-on experience in implementing authentication, CRUD operations, database interactions, error handling, and documentation.
+ #### MONGO_URI=mongodb://localhost:27017/taskmanager
 
-### Feel free to reach out if you have any questions or need further clarification on any aspect of the project. Happy coding! 🚀
+ You can also configure other variables in this file such as JWT_SECRET for JWT token generation.
+
+##
+##
+
+ ## •API Endpoints
+
+### The following endpoints are available:
+
+#### POST /api/auth/register: Register a new user.
+#### POST /api/auth/login: Login with username and password to obtain JWT token.
+#### GET /api/tasks: Get all tasks.
+#### POST /api/tasks: Create a new task.
+#### GET /api/tasks/:id: Get a specific task by ID.
+#### PUT /api/tasks/:id: Update a task by ID.
+#### DELETE /api/tasks/:id: Delete a task by ID.
+
+## Dependencies
+• Express.js: Web application framework for Node.js.
+• bcrypt: Library for hashing passwords.
+• jsonwebtoken: JSON Web Token implementation for authentication.
+• Mongoose: MongoDB object modeling tool designed to work in an asynchronous environment.
+  
+  
+ ## Usage
+ After setting up and running the API, you can interact with it using HTTP requests. For example, you • • can use tools like Postman or cURL to send requests to the defined endpoints.
+
+ Ensure you include the necessary authentication token in the request headers for routes that require authentication. The token can be obtained by logging in with valid credentials and obtaining the JWT token from the login response.
+
+ ## Testing
+ You can use tools like Postman to test the API endpoints. Be sure to go through the authentication process #### to get the JWT token before accessing protected routes.
