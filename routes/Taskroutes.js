@@ -90,6 +90,33 @@ router.put('/:id', verifyToken, async (req, res) => {
     }
 });
 
+// Update title of a task
+
+router.patch('/:id/title', verifyToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title } = req.body;
+
+        if (!title) {
+            return res.status(400).send('Title is required');
+        }
+
+        const task = await Task.findById(id);
+        if (!task) {
+            return res.status(404).send('Task not found');
+        }
+
+        task.title = title;
+
+        await task.save();
+
+        res.json(task);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
 // Delete a task
 router.delete('/:id', verifyToken, async (req, res) => {
     try {

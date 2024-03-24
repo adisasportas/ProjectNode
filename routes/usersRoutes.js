@@ -86,6 +86,8 @@ router.post('/whoami', (req, res) => {
         res.status(401).send('Invalid token');
     }
 });
+
+
 // Update user
 router.put('/:id', async (req, res) => {
     try {
@@ -100,6 +102,34 @@ router.put('/:id', async (req, res) => {
         res.json(updatedUser);
         if (!updatedUser) return res.status(404).send('User not found');
         res.json(updatedUser);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+//Update Email of user by id .
+router.patch('/:id/email', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).send('Email is required');
+        }
+
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        user.email = email;
+        if (req.body.password) {
+            const hashedPass = await bcrypt.hash(req.body.password, 10);
+            user.password = hashedPass;
+        }
+        await user.save();
+
+        res.json(user);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

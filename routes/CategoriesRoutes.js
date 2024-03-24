@@ -88,6 +88,37 @@ router.put('/:id', verifyToken, async (req, res) => {
     }
 });
 
+
+// Update encrypted name of a category      categories/:id/name
+
+router.patch('/:id/name', verifyToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name } = req.body;
+
+        
+        if (!name) {
+            return res.status(400).send('Name is required');
+        }
+
+        const category = await Category.findById(id);
+        if (!category) {
+            return res.status(404).send('Category not found');
+        }
+
+        const hashedName = await bcrypt.hash(name, 10);
+
+        category.name = hashedName;
+
+        await category.save();
+
+        res.json(category);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
 // Delete a category
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
