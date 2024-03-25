@@ -31,6 +31,7 @@ router.post('/token', (req, res) => {
     }
 });
 // Get all tasks
+// URL http://localhost:5001/tasks/
 router.get('/', verifyToken, async (req, res) => {
     try {
         const tasks = await Task.find();
@@ -42,6 +43,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Get a single task by ID
+// URL http://localhost:5001/tasks/66014bd4ca4732ca9a74a7bc
 router.get('/:id', verifyToken, async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
@@ -54,6 +56,7 @@ router.get('/:id', verifyToken, async (req, res) => {
 });
 
 // Create a new task
+// URL http://localhost:5001/tasks/
 router.post('/', verifyToken, async (req, res) => {
     try {
         const { title, description, status, dueDate } = req.body;
@@ -73,6 +76,7 @@ router.post('/', verifyToken, async (req, res) => {
 });
 
 // Update a task
+// URL http://localhost:5001/tasks/66014bd4ca4732ca9a74a7bc
 router.put('/:id', verifyToken, async (req, res) => {
     try {
         const { title, description, status, dueDate } = req.body;
@@ -91,6 +95,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 });
 
 // Update title of a task
+// URL http://localhost:5001/tasks/66014bd4ca4732ca9a74a7bc/title
 
 router.patch('/:id/title', verifyToken, async (req, res) => {
     try {
@@ -105,19 +110,21 @@ router.patch('/:id/title', verifyToken, async (req, res) => {
         if (!task) {
             return res.status(404).send('Task not found');
         }
-
+        
         task.title = title;
 
         await task.save();
 
         res.json(task);
     } catch (err) {
+        
         console.error(err);
         res.sendStatus(500);
     }
 });
 
 // Delete a task
+// http://localhost:5001/tasks/66014bd4ca4732ca9a74a7bc
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const deletedTask = await Task.findByIdAndDelete(req.params.id);

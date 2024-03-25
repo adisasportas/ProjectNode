@@ -15,6 +15,7 @@ const verifyToken = (req, res, next) => {
     }
     return next();
 };
+//URL http://localhost:5001/categories/token
 router.post('/token', async (req, res) => {
     const { name } = req.body; // Using `name` to identify the category
     if (!name) {
@@ -34,6 +35,7 @@ router.post('/token', async (req, res) => {
     }
 });
 // Get all categories
+// URL http://localhost:5001/categories/
 router.get('/', verifyToken, async (req, res) => {
     try {
         const categories = await Category.find();
@@ -45,6 +47,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Get a single category by ID
+// URL http://localhost:5001/categories/66014bd4ca4732ca9a74a7c3
 router.get('/:id', verifyToken, async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
@@ -57,6 +60,7 @@ router.get('/:id', verifyToken, async (req, res) => {
 });
 
 // Create a new category
+// URL http://localhost:5001/categories/
 router.post('/', verifyToken, async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -71,6 +75,7 @@ router.post('/', verifyToken, async (req, res) => {
 });
 
 // Update a category
+// URL http://localhost:5001/categories/66014bd4ca4732ca9a74a7c3
 router.put('/:id', verifyToken, async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -90,7 +95,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 
 
 // Update encrypted name of a category      categories/:id/name
-
+// URL http://localhost:5001/categories/66014bd4ca4732ca9a74a7c3/name
 router.patch('/:id/name', verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
@@ -119,7 +124,7 @@ router.patch('/:id/name', verifyToken, async (req, res) => {
     }
 });
 
-// Delete a category
+// Delete a category// URL http://localhost:5001/categories/66014bd4ca4732ca9a74a7c3
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const deletedCategory = await Category.findByIdAndDelete(req.params.id);

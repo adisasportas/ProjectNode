@@ -23,9 +23,22 @@ npm install
 This project relies on the following dependencies:
 
 - Express.js: A minimal and flexible Node.js web application framework.
+
+    npm install express
+
 - Mongoose: A MongoDB object modeling tool designed to work in an asynchronous environment.
+
+    npm install mongoose
+
 - bcrypt: A library for hashing passwords.
+
+    npm install bcryptjs
+
 - jsonwebtoken: A library to generate and verify JWTs (JSON Web Tokens).
+
+    npm install jsonwebtoken
+
+
 
 ## Running the API
 
@@ -35,13 +48,13 @@ npm start
 
 
 This command starts the server, and the API will be accessible at the specified endpoints.
-The server will be running at http://localhost:3000.
+The server will be running at http://localhost:5001.
 
 ## Configuration
 
 Before running the API, you need to configure the MongoDB connection. Open the `config/config.env` file and set the `MONGO_URI` variable to your MongoDB connection URI.
 
-MONGO_URI=mongodb://localhost:27017/taskmanager
+MONGO_URI=mongodb://localhost:5001/taskmanager
 
 
 You can also configure other variables in this file such as `JWT_SECRET` for JWT token generation.

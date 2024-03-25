@@ -5,6 +5,7 @@ const router = express.Router();
 const User = require('../models/User');
 
 // Get all users
+// URL http://localhost:5001/
 router.get('/', async (req, res) => {
     try {
         const allUsers = await User.find().select('-password'); 
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single user by ID
+// URL http://localhost:5001/66014bd4ca4732ca9a74a7b2
 router.get('/:id', async (req, res) => {
     try {
         const givenID = req.params.id;
@@ -29,6 +31,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new user
+// URL http://localhost:5001/
 router.post('/', async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -57,6 +60,7 @@ router.post('/', async (req, res) => {
 });
 
 // User login
+// URL http://localhost:5001/login
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
@@ -89,6 +93,7 @@ router.post('/whoami', (req, res) => {
 
 
 // Update user
+// URL http://localhost:5001/users/66014bd4ca4732ca9a74a7b2
 router.put('/:id', async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -108,6 +113,8 @@ router.put('/:id', async (req, res) => {
     }
 });
 //Update Email of user by id .
+// URL http://localhost:5001/users/66014bd4ca4732ca9a74a7b2/email
+
 router.patch('/:id/email', async (req, res) => {
     try {
         const { id } = req.params;
@@ -137,6 +144,7 @@ router.patch('/:id/email', async (req, res) => {
 });
 
 // Delete a user
+// URL http://localhost:5001/66014bd4ca4732ca9a74a7b2
 router.delete('/:id', async (req, res) => {
     try {
         const givenID = req.params.id;
